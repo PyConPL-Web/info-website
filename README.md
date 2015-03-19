@@ -1,2 +1,2 @@
 # info-website
-Website with informations about PyConPL
+PyConPL information website
