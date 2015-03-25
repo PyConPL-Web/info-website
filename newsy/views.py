@@ -1,3 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def add_news(request):
+    pass
+
+
+def delete_news(request):
+    pass
+
+
+def edit_news(request):
+    pass
