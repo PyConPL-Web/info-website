@@ -2,9 +2,18 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'newsy/style.css' %}" />
+    <title>PyConPL 2015- newsy</title>
 </head>
 <body>
+
+{% for news in news_list %}
+	<div>
+		<p>{{ news.title }}</p>
+		<p>{{ news.date }}</p>
+		<p>{{ news.body_short }}</p>
+	</div>
+{% endfor %}
 
 </body>
 </html>
