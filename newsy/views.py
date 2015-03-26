@@ -1,13 +1,10 @@
 from django.shortcuts import render
 
 
-def add_news(request):
+def index(request):
     pass
 
 
-def delete_news(request):
+def detail(request, permalink):
     pass
 
-
-def edit_news(request):
-    pass
