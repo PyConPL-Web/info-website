@@ -54,9 +54,3 @@ class EventDatabaseTest(TestCase):
         second_event = Event.objects.get(id=2)
         self.assertEqual(first_event.classroom, 'A')
         self.assertEqual(second_event.classroom, '32')
-
-    #  this test should fail
-    def test_events_start_time_after_end_time(self):
-        Event.objects.create(id=3, title='Time', start_time='15:55:55',
-                             end_time='10:55:55', desc='Time is money',
-                             prelector='Mr Time', classroom='T')
