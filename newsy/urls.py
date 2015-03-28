@@ -6,6 +6,6 @@ urlpatterns = patterns('',
     # url(r'^$', 'info_web.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^[/]$', views.index, name='index'),
+    url(r'^$', views.index, name='index'),
     url(r'^datail/(?P<permalink>.*)[/]$', views.detail, name='detail'),
 )
