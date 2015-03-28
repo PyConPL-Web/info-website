@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'agenda/index.css' %}"/>
+    <title>PyConPL 2015- newsy</title>
+</head>
+<body>
+    <table>
+    {% for event in events %}
+        <tr>
+            <td>{{ event.start_time }}</td>
+            <td>{{ event.end_time }}</td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.prelector }}</td>
+            <td>{{ event.classroom }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

@@ -13,6 +13,5 @@ class Event(models.Model):
     def __unicode__(self):
         return "{title}".format(title=self.title)
 
-
 class Type(models.Model):
     pass
