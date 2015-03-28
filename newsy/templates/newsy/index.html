@@ -11,7 +11,7 @@
 {% for news in news_list %}
 	<div>
 		<p>{{ news.title }}</p>
-		<p>{{ news.date }}</p>
+		<!-- <p>{{ news.date }}</p> -->
 		<p>{{ news.body_short }}</p>
 		<a href = "{% url 'newsy:detail' news.id %}"> >>więcej</a>
 	</div>

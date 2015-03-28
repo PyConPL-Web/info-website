@@ -3,7 +3,7 @@ from newsy.models import News
 
 
 def index(request):
-    news_list = list(News.objects.order_by('-date'))
+    news_list = list(News.objects.order_by('-date', '-posted_hour'))
     for news in news_list:
         news.body_short = '.'.join(news.body.split('.')[:5])
     context = {

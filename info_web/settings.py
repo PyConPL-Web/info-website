@@ -69,7 +69,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'pl-pl'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'CET' #'UTC'
 
 USE_I18N = True
 
