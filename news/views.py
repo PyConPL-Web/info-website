@@ -5,11 +5,19 @@ from news.models import News
 def index(request):
     news_list = list(News.objects.order_by('-date', '-posted_hour'))
     for news in news_list:
-        news.body_short = '.'.join(news.body.split('.')[:5])
+        if len(news.body) < 100:
+            news.body_short = news.body
+            continue
+        end = 100
+        news.body_short = news.body[:end]
+        while news.body[end] != ' ':
+            news.body_short += news.body[end]
+            end += 1
+        news.body_short += '...'
     context = {
         'news_list': news_list,
     }
-    return render(request, 'news/index.html', context)
+    return render(request, 'index.html', context)
 
 
 def detail(request, permalink):
@@ -17,4 +25,4 @@ def detail(request, permalink):
     context = {
         'news': news
     }
-    return render(request, 'news/detail.html', context)
+    return render(request, 'detail.html', context)
