@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from newsy.models import News
+from news.models import News
 
 
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
     context = {
         'news_list': news_list,
     }
-    return render(request, 'newsy/index.html', context)
+    return render(request, 'news/index.html', context)
 
 
 def detail(request, permalink):
@@ -17,4 +17,4 @@ def detail(request, permalink):
     context = {
         'news': news
     }
-    return render(request, 'newsy/detail.html', context)
+    return render(request, 'news/detail.html', context)

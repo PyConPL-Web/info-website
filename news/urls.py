@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from newsy import views
+from news import views
 
 urlpatterns = patterns('',
     # Examples:
