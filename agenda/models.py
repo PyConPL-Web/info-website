@@ -13,5 +13,9 @@ class Event(models.Model):
     def __unicode__(self):
         return "{title}".format(title=self.title)
 
+    def __str__(self):
+        return unicode(self)
+
+
 class Type(models.Model):
     pass
