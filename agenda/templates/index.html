@@ -8,8 +8,10 @@
 </head>
 <body>
     <table>
+        <th> Schedule: </th>
     {% for event in events %}
         <tr>
+            <td>{{ event.date }}</td>
             <td>{{ event.start_time }}</td>
             <td>{{ event.end_time }}</td>
             <td>{{ event.title }}</td>
