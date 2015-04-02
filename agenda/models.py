@@ -19,8 +19,8 @@ class Event(models.Model):
     def getStartTime(self):
         return self.start_time.hour + self.start_time.minute
 
-    #def getEndTime(self):
-     #   return self.end_time.hour + self.end_time.minute
+    def getEndTime(self):
+       return self.end_time.hour + self.end_time.minute
 
 class Type(models.Model):
     pass

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'agenda/detail.css' %}"/>
+    <title>Szczegoly wydarzenia</title>
+</head>
+<body>
+    <h1> {{ event.title }}</h1>
+    <h2> O wydarzeniu </h2>
+    <p> {{ event.desc }} </p>
+</body>
+</html>
