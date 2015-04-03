@@ -10,6 +10,7 @@ def index(request):
     response = TemplateResponse(request, 'index.html', context)
     return response
 
+
 def detail(request, event_id):
     try:
         event = models.Event.objects.get(pk=event_id)

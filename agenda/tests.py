@@ -4,6 +4,7 @@ from agenda.models import Event
 import datetime
 from django.utils.encoding import smart_text
 from .views import index
+from django.core.urlresolvers import reverse
 
 ENG_TEXT = """Lorem ipsum dolor sit amet,consectetur adipiscing elit.
 Praesent nec enim in erat fermentum feugiat a sit amet nisi.
@@ -17,10 +18,10 @@ cichy smutek panów groni mają od obywateli."""
 
 class EventDatabaseTest(TestCase):
     def setUp(self):
-        Event.objects.create(id=1, title='Lorem ipsum', start_time='15:55:55',
+        Event.objects.create(id=1, title='Lorem ipsum', date='2015-4-1', start_time='15:55:55',
                              end_time='16:55:55', desc=ENG_TEXT,
                              prelector='John Smith', classroom='A')
-        Event.objects.create(id=2, title='Świerzop', start_time='12:00:12',
+        Event.objects.create(id=2, title='Świerzop', date='2015-4-2', start_time='12:00:12',
                              end_time='12:30:22', desc=POL_TEXT,
                              prelector='Grzegorz Brzęczyszczykiewicz', classroom='32')
 
@@ -56,13 +57,20 @@ class EventDatabaseTest(TestCase):
         self.assertEqual(first_event.classroom, 'A')
         self.assertEqual(second_event.classroom, '32')
 
+    def test_model_methods(self):
+        first_event = Event.objects.get(id=1)
+        second_event = Event.objects.get(id=2)
+        self.assertEqual(first_event.getStartTime(), 70)
+        self.assertEqual(first_event.getEndTime(), 71)
+        self.assertEqual(first_event.getEndTime() - first_event.getStartTime(), 1)
+
 
 class EventViewsTest(TestCase):
     def setUp(self):
-        Event.objects.create(id=1, title='Lorem ipsum', start_time='15:55:55',
+        Event.objects.create(id=1, title='Lorem ipsum', date='2015-4-3', start_time='15:55:55',
                              end_time='16:55:55', desc=POL_TEXT,
                              prelector='John Smith', classroom='A')
-        self.event_factory = Event.objects.create(title='Factory test', start_time='10:00:01',
+        self.event_factory = Event.objects.create(title='Factory test', date='2015-4-3', start_time='10:00:01',
                                                   end_time='11:00:00', desc='Simple factory test',
                                                   prelector='Factory', classroom='F')
         self.client = Client()
@@ -89,3 +97,15 @@ class EventViewsTest(TestCase):
         self.assertEqual(response.context_data['events'][1].desc, 'Simple factory test')
         self.assertEqual(response.context_data['events'][1].prelector, 'Factory')
         self.assertEqual(response.context_data['events'][1].classroom, 'F')
+
+    def test_detail_view(self):
+        response = self.client.get('/agenda/detail/1/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Lorem ipsum')
+        self.assertContains(response, smart_text(POL_TEXT))
+        request = self.factory.get('/agenda/detail/2/')
+        request.event = self.event_factory
+        response_1 = index(request)
+        self.assertEqual(response_1.status_code, 200)
+        self.assertContains(response_1, 'Factory test')
+        self.assertEqual(response_1.context_data['events'][1].desc, 'Simple factory test')

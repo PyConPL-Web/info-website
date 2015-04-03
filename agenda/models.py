@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Event(models.Model):
     date = models.DateField()
     start_time = models.TimeField()
@@ -20,7 +21,8 @@ class Event(models.Model):
         return self.start_time.hour + self.start_time.minute
 
     def getEndTime(self):
-       return self.end_time.hour + self.end_time.minute
+        return self.end_time.hour + self.end_time.minute
+
 
 class Type(models.Model):
     pass
