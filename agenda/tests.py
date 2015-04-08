@@ -24,45 +24,35 @@ class EventDatabaseTest(TestCase):
         Event.objects.create(id=2, title='Świerzop', date='2015-4-2', start_time='12:00:12',
                              end_time='12:30:22', desc=POL_TEXT,
                              prelector='Grzegorz Brzęczyszczykiewicz', classroom='32')
+        self.first_event = Event.objects.get(id=1)
+        self.second_event = Event.objects.get(id=2)
 
     def test_events_have_start_end_times(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.start_time, datetime.time(15, 55, 55))
-        self.assertEqual(first_event.end_time, datetime.time(16, 55, 55))
-        self.assertEqual(second_event.start_time, datetime.time(12, 00, 12))
-        self.assertEqual(second_event.end_time, datetime.time(12, 30, 22))
+        self.assertEqual(self.first_event.start_time, datetime.time(15, 55, 55))
+        self.assertEqual(self.first_event.end_time, datetime.time(16, 55, 55))
+        self.assertEqual(self.second_event.start_time, datetime.time(12, 00, 12))
+        self.assertEqual(self.second_event.end_time, datetime.time(12, 30, 22))
 
     def test_events_have_title(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.title, 'Lorem ipsum')
-        self.assertEqual(second_event.title, smart_text('Świerzop'))
+        self.assertEqual(self.first_event.title, 'Lorem ipsum')
+        self.assertEqual(self.second_event.title, smart_text('Świerzop'))
 
     def test_events_have_desc(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.desc, ENG_TEXT)
-        self.assertEqual(second_event.desc, smart_text(POL_TEXT))
+        self.assertEqual(self.first_event.desc, ENG_TEXT)
+        self.assertEqual(self.second_event.desc, smart_text(POL_TEXT))
 
     def test_events_have_prelector(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.prelector, 'John Smith')
-        self.assertEqual(second_event.prelector, smart_text('Grzegorz Brzęczyszczykiewicz'))
+        self.assertEqual(self.first_event.prelector, 'John Smith')
+        self.assertEqual(self.second_event.prelector, smart_text('Grzegorz Brzęczyszczykiewicz'))
 
     def test_events_have_classroom(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.classroom, 'A')
-        self.assertEqual(second_event.classroom, '32')
+        self.assertEqual(self.first_event.classroom, 'A')
+        self.assertEqual(self.second_event.classroom, '32')
 
     def test_model_methods(self):
-        first_event = Event.objects.get(id=1)
-        second_event = Event.objects.get(id=2)
-        self.assertEqual(first_event.getStartTime(), 70)
-        self.assertEqual(first_event.getEndTime(), 71)
-        self.assertEqual(first_event.getEndTime() - first_event.getStartTime(), 1)
+        self.assertEqual(self.first_event.get_start_time(), 70)
+        self.assertEqual(self.first_event.get_end_time(), 71)
+        self.assertEqual(self.first_event.get_end_time() - self.first_event.get_start_time(), 1)
 
 
 class EventViewsTest(TestCase):

@@ -17,10 +17,10 @@ class Event(models.Model):
     def __str__(self):
         return unicode(self)
 
-    def getStartTime(self):
+    def get_start_time(self):
         return self.start_time.hour + self.start_time.minute
 
-    def getEndTime(self):
+    def get_end_time(self):
         return self.end_time.hour + self.end_time.minute
 
 
