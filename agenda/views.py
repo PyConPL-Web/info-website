@@ -3,6 +3,7 @@ from django.template.response import TemplateResponse
 from agenda.models import Event
 from django.shortcuts import get_object_or_404
 
+
 def index(request):
     all_events = list(Event.objects.order_by('-date', '-start_time'))
     context = {'events': all_events}
