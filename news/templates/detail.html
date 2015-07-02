@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="pl">
+    <meta charset="UTF-8">
+    <title>{{ news.title }}</title>
+</head>
+<body>
+
+<div>
+	<p>{{ news.title }}</p>
+	<p>{{ news.date }}</p>
+	<p>{{ news.body }}</p>
+</div>
+
+<a href = "{% url 'news:index' %}"> główna </a>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="pl">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/style.css' %}" />
+    <title>PyConPL 2015- newsy</title>
+</head>
+<body>
+
+{% for news in news_list %}
+	<div>
+		<p>{{ news.title }}</p>
+		<!-- <p>{{ news.date }}</p> -->
+		<p>{{ news.body_short }}</p>
+		<a href = "{% url 'news:detail' news.id %}"> >>więcej</a>
+	</div>
+{% endfor %}
+
+</body>
+</html>
