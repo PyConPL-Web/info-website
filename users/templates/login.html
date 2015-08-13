@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    zaloguj sie albo zarejestruj <br>
+    <form action={% url "users:validate_user" %} method="POST">{% csrf_token %}
+        e-mail lub nick: <br>
+        <input type="text", name="login"> <br>
+        pass: <br>
+        <input type="password", name="password"> <br>
+        <input type="submit", name="submit", value="login"> <br>
+    </form>
+<a href={% url "users:signup" %}>sign up</a>
+</body>
+</html>
