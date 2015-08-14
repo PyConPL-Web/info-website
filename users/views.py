@@ -1,11 +1,12 @@
 from hashlib import md5
 from random import random
 
+from django.contrib import auth
 from django.contrib.auth.hashers import make_password, check_password
+# from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
-from django.shortcuts import render, HttpResponse, redirect
-
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 from users.models import PyconUser
 
@@ -20,15 +21,26 @@ def login(request, **kwargs):
 def signup(request, **kwargs):
     return render(request, 'signup.html')
 
+def logout(request, **kwargs):
+    auth.logout(request)
+    return redirect(reverse('users:index'))
+
 def validate_user(request, **kwargs):
+    #TODO: session maintaining after login; add logout
     if request.method == 'POST':
         POST = request.POST
         submit_type = POST.get('submit')
         if submit_type == 'login':
-            return redirect('users:index')
+            user = get_object_or_404(PyconUser, email=POST.get('login'))
+            valid_pass = check_password(POST.get('password'), user.password)
+            if not valid_pass:
+                return HttpResponse('Bad password')
+            if user.is_confirmed:
+                return redirect(reverse('users:index'))
+            else:
+                return HttpResponse('Confirm your account first')
         elif submit_type == 'signup':
-            # TODO: validate fields
-            confirm_string = md5(str(int(random()*100))).hexdigest()[:16]
+            confirm_string = md5(str(random()*100)).hexdigest()[:16]
             msg = ("click below to activate account \n" +
                    '127.0.0.1:8000' + reverse('users:confirm_user',
                                             kwargs={'confirm_string': confirm_string}))
@@ -52,6 +64,6 @@ def confirm_user(request, **kwargs):
             user = PyconUser.objects.get(confirm_string=confirm_string)
         except:
             return HttpResponse('invalid confirm_string')
-        user.confirmed = True
+        user.is_confirmed = True
         user.save()
         return HttpResponse(str(user))
