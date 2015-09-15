@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    zaloguj sie albo zarejestruj <br>
+    {% if bad_password == 1 %}
+        <p>niepoprawne haslo lub login</p>
+    {% endif %}
+    <form action={% url "login:index" %} method="POST">{% csrf_token %}
+        e-mail lub nick: <br>
+        <input type="text" name="username"> <br>
+        pass: <br>
+        <input type="password" name="password"> <br>
+        <input type="submit" name="submit"> <br>
+    </form>
+<!--<a href= link-to-signup-index>sign up</a>-->
+</body>
+</html>
