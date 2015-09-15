@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>sign up</title>
+</head>
+<body>
+    {% if confirm == 1 %}
+        <p>check your email and confirm</p>
+    {% endif %}
+    <form action={% url "signup:index"%} method="POST">{% csrf_token %}
+        e-mail: <br>
+        <input type="text" name="email" required> <br>
+        username: <br>
+        <input type="text" name="username" required> <br>
+        pass: <br>
+        <input type="password" name="password" required> <br>
+        <input type="submit" name="submit"">
+    </form>
+</body>
+</html>
